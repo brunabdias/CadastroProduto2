@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="cadastroProduto">
+	<head>
+		<meta charset="utf-8">
+		<title>Cadastro de Produtos</title>
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="estilo.css">
+		<script type="text/javascript" src="lib/angular-1.7.5/angular.js"></script>
+		<script src="lib/angular-1.7.5/angular-messages.js"></script>
+		<script type="text/javascript" src="cadastro.js"></script>
+	</head>
+	<body ng-controller="cadastroProdutoCtrl">
+		
+		<div class="jumbotron">
+			<h1>Cadastro de Produtos</h1>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2"></div>
+
+				<div class="col-md-8">
+					<form name="listaForm">
+						<div class="form-row">
+							<div class="form-group col-md-5">
+								<label for="codigo">Código</label>
+								<input class="form-control"	name="inputName" type="text"
+								ng-model="produto.codigo" ng-blur="verificarDuplicidade(produto.codigo)">
+								
+								<div ng-messages="listaForm.inputName.$error">
+									<span ng-message="duplicado">This field is required.</span>
+								</div>
+						</div>						
+							<div class="form-group col-md-7">
+								<label for="produto">Produto</label>
+								<input type="text" class="form-control" ng-model="produto.produto">
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="altura">Altura</label>
+								<input type="text" class="form-control" ng-model="produto.altura">
+							</div>
+							<div class="form-group col-md-4">
+								<label for="largura">Largura</label>
+								<input type="text" class="form-control" ng-model="produto.largura">
+							</div>
+							<div class="form-group col-md-4">
+								<label for="profundidade">Profundidade</label>
+								<input type="text" class="form-control" ng-model="produto.profundidade">
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group">
+					   			<label for="descricao">Descrição do Produto</label>
+					  			<textarea class="form-control" rows="3" ng-model="tmpDescricao"></textarea>
+							</div>
+				  		</div>					
+					</form>
+
+					<button type="button" class="btn btn-primary btn-desc"
+					ng-click="adicionarDescricao(tmpDescricao)">
+						Salvar Descrição
+					</button>
+
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-cadastro"
+						ng-click="adicionarProduto(produto)">
+							Cadastrar Produto
+					</button>
+
+					<table class="table table-striped">
+						<tr>
+							<th>Código</th>
+							<th>Produto</th>
+							<th>Altura</th>
+							<th>Largura</th>
+							<th>Profundidade</th>
+							<th>Descrição</th>
+						</tr>
+						<tr ng-repeat="produto in produtos">
+							<td>{{produto.codigo}}</td>
+							<td>{{produto.produto}}</td>
+							<td>{{produto.altura}}</td>
+							<td>{{produto.largura}}</td>
+							<td>{{produto.profundidade}}</td>
+							<td>{{produto.descricao}}</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</body>
+</html>
